@@ -6,9 +6,16 @@ const CategoriesRecipes = props => {
     <View style={styles.screen}>
       <Text>The Categories Recipes Screen</Text>
       <Button
-        title='Go to special Recipe'
+        title='Go to detail Recipe'
         onPress={() => {
           props.navigation.navigate("Recipe");
+        }}
+      />
+      <Button
+        title='Go Back'
+        onPress={() => {
+          // props.navigation.goBack();
+          props.navigation.pop();
         }}
       />
     </View>
