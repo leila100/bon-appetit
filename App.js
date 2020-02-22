@@ -3,10 +3,12 @@ import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
+import RecipesNavigator from "./navigation/recipesNavigator";
+
 const fetchFonts = () => {
   return Font.loadAsync({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-bold.ttf")
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
   });
 };
 
@@ -15,11 +17,7 @@ export default function App() {
 
   if (!fontsLoaded) return <AppLoading startAsync={fetchFonts} onFinish={() => setFontsLoaded(true)} />;
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+  return <RecipesNavigator />;
 }
 
 const styles = StyleSheet.create({
