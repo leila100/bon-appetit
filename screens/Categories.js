@@ -9,7 +9,14 @@ const Categories = props => {
     return (
       <TouchableOpacity
         style={styles.gridItem}
-        onPress={() => props.navigation.navigate({ routeName: "CategoryRecipes" })}
+        onPress={() =>
+          props.navigation.navigate({
+            routeName: "CategoryRecipes",
+            params: {
+              categoryId: itemData.item.id
+            }
+          })
+        }
       >
         <View>
           <Text>{itemData.item.title}</Text>
@@ -21,14 +28,6 @@ const Categories = props => {
   return (
     <FlatList keyExtractor={(item, index) => item.id} data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
   );
-};
-
-Categories.navigationOptions = {
-  headerTitle: "Recipe Categories",
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "white"
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary
 };
 
 const styles = StyleSheet.create({
