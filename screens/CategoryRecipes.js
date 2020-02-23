@@ -1,27 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
-import { CATEGORIES } from "../data/dummy-data";
+import { CATEGORIES, RECIPES } from "../data/dummy-data";
 
 const CategoriesRecipes = props => {
   const catId = props.navigation.getParam("categoryId");
-  const selectedCat = CATEGORIES.find(cat => cat.id === catId);
+
+  const recipeList = RECIPES.filter(recipe => recipe.categoryIds.includes(catId));
+
+  const renderRecipeItem = itemData => {
+    return (
+      <View>
+        <Text>{itemData.item.title}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.screen}>
-      <Text>The Categories Recipes Screen</Text>
-      <Text>{selectedCat.title}</Text>
-      <Button
-        title='Go to detail Recipe'
-        onPress={() => {
-          props.navigation.navigate("Recipe");
-        }}
-      />
-      <Button
-        title='Go Back'
-        onPress={() => {
-          props.navigation.pop();
-        }}
-      />
+      <FlatList keyExtractor={(item, index) => item.id} data={recipeList} renderItem={renderRecipeItem} />
     </View>
   );
 };
