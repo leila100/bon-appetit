@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import { CATEGORIES, RECIPES } from "../data/dummy-data";
+import RecipeCard from "../components/RecipeCard";
 
 const CategoriesRecipes = props => {
   const catId = props.navigation.getParam("categoryId");
@@ -9,16 +10,17 @@ const CategoriesRecipes = props => {
   const recipeList = RECIPES.filter(recipe => recipe.categoryIds.includes(catId));
 
   const renderRecipeItem = itemData => {
-    return (
-      <View>
-        <Text>{itemData.item.title}</Text>
-      </View>
-    );
+    return <RecipeCard recipe={itemData.item} onSelect={() => {}} />;
   };
 
   return (
     <View style={styles.screen}>
-      <FlatList keyExtractor={(item, index) => item.id} data={recipeList} renderItem={renderRecipeItem} />
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={recipeList}
+        renderItem={renderRecipeItem}
+        style={{ width: "95%" }}
+      />
     </View>
   );
 };
