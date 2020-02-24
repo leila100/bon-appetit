@@ -10,7 +10,19 @@ const CategoriesRecipes = props => {
   const recipeList = RECIPES.filter(recipe => recipe.categoryIds.includes(catId));
 
   const renderRecipeItem = itemData => {
-    return <RecipeCard recipe={itemData.item} onSelect={() => {}} />;
+    return (
+      <RecipeCard
+        recipe={itemData.item}
+        onSelect={() =>
+          props.navigation.navigate({
+            routeName: "Recipe",
+            params: {
+              recipeId: itemData.item.id
+            }
+          })
+        }
+      />
+    );
   };
 
   return (
