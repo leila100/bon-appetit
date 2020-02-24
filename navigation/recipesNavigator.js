@@ -1,4 +1,5 @@
 import { createStackNavigator } from "react-navigation-stack";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createAppContainer } from "react-navigation";
 import { Platform } from "react-native";
 
@@ -6,6 +7,7 @@ import Categories from "../screens/Categories";
 import CategoryRecipes from "../screens/CategoryRecipes";
 import Recipe from "../screens/Recipe";
 import Colors from "../constants/Colors";
+import Favorites from "../screens/Favorites";
 
 const recipesNavigator = createStackNavigator(
   {
@@ -30,4 +32,9 @@ const recipesNavigator = createStackNavigator(
   }
 );
 
-export default createAppContainer(recipesNavigator);
+const recipesFavTabNavigator = createBottomTabNavigator({
+  Recipes: recipesNavigator,
+  Favorites: Favorites
+});
+
+export default createAppContainer(recipesFavTabNavigator);
