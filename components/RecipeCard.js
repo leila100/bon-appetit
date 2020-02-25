@@ -9,6 +9,8 @@ import {
   ImageBackground
 } from "react-native";
 
+import DefaultText from "../components/DefaultText";
+
 let TouchableComp = TouchableOpacity;
 if (Platform.OS === "android" && Platform.Version >= 21) TouchableComp = TouchableNativeFeedback;
 
@@ -28,9 +30,9 @@ const RecipeCard = props => {
             </ImageBackground>
           </View>
           <View style={{ ...styles.recipeRow, ...styles.detail }}>
-            <Text>{duration}m</Text>
-            <Text>{complexity.toUpperCase()}</Text>
-            <Text>{cost.toUpperCase()}</Text>
+            <DefaultText>{duration}m</DefaultText>
+            <DefaultText>{complexity.toUpperCase()}</DefaultText>
+            <DefaultText>{cost.toUpperCase()}</DefaultText>
           </View>
         </View>
       </TouchableComp>
