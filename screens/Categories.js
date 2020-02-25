@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Platform } from "react-native";
+import { FlatList } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { CATEGORIES } from "../data/dummy-data";
@@ -44,13 +44,5 @@ Categories.navigationOptions = navData => {
     )
   };
 };
-
-const styles = StyleSheet.create({
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    height: 100
-  }
-});
 
 export default Categories;
