@@ -5,12 +5,14 @@ import { createAppContainer } from "react-navigation";
 import { Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 
 import Categories from "../screens/Categories";
 import CategoryRecipes from "../screens/CategoryRecipes";
 import Recipe from "../screens/Recipe";
 import Colors from "../constants/Colors";
 import Favorites from "../screens/Favorites";
+import Filters from "../screens/Filters";
 
 const defaultStackNavOption = {
   headerStyle: {
@@ -86,4 +88,13 @@ const recipesFavTabNavigator =
         }
       });
 
-export default createAppContainer(recipesFavTabNavigator);
+const filterNavigator = createStackNavigator({
+  Filters: Filters
+});
+
+const mainNavigator = createDrawerNavigator({
+  RecipesFav: recipesFavTabNavigator,
+  Filters: filterNavigator
+});
+
+export default createAppContainer(mainNavigator);

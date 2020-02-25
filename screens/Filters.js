@@ -8,6 +8,11 @@ const Filters = () => {
     </View>
   );
 };
+
+Filters.navigationOptions = {
+  headerTitle: "Filter Recipes"
+};
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
