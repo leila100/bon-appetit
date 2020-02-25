@@ -1,40 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import { CATEGORIES, RECIPES } from "../data/dummy-data";
-import RecipeCard from "../components/RecipeCard";
+import RecipeList from "../components/RecipeList";
 
 const CategoriesRecipes = props => {
   const catId = props.navigation.getParam("categoryId");
 
   const recipeList = RECIPES.filter(recipe => recipe.categoryIds.includes(catId));
 
-  const renderRecipeItem = itemData => {
-    return (
-      <RecipeCard
-        recipe={itemData.item}
-        onSelect={() =>
-          props.navigation.navigate({
-            routeName: "Recipe",
-            params: {
-              recipeId: itemData.item.id
-            }
-          })
-        }
-      />
-    );
-  };
-
-  return (
-    <View style={styles.screen}>
-      <FlatList
-        keyExtractor={(item, index) => item.id}
-        data={recipeList}
-        renderItem={renderRecipeItem}
-        style={{ width: "95%" }}
-      />
-    </View>
-  );
+  return <RecipeList listData={recipeList} navigation={props.navigation} />;
 };
 
 CategoriesRecipes.navigationOptions = navigationData => {
@@ -44,13 +18,5 @@ CategoriesRecipes.navigationOptions = navigationData => {
     headerTitle: selectedCat.title
   };
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
 
 export default CategoriesRecipes;

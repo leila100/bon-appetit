@@ -12,6 +12,13 @@ import Recipe from "../screens/Recipe";
 import Colors from "../constants/Colors";
 import Favorites from "../screens/Favorites";
 
+const defaultStackNavOption = {
+  headerStyle: {
+    backgroundColor: Platform.OS === "android" ? Colors.primary : "white"
+  },
+  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary
+};
+
 const recipesNavigator = createStackNavigator(
   {
     Categories: {
@@ -26,12 +33,17 @@ const recipesNavigator = createStackNavigator(
     Recipe: Recipe
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: Platform.OS === "android" ? Colors.primary : "white"
-      },
-      headerTintColor: Platform.OS === "android" ? "white" : Colors.primary
-    }
+    defaultNavigationOptions: defaultStackNavOption
+  }
+);
+
+const favoritesNavigator = createStackNavigator(
+  {
+    Favorites: Favorites,
+    Recipe: Recipe
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOption
   }
 );
 
@@ -47,7 +59,7 @@ const tabConfig = {
     }
   },
   Favorites: {
-    screen: Favorites,
+    screen: favoritesNavigator,
     navigationOptions: {
       tabBarLabel: "Favorites!!",
       tabBarIcon: tabInfo => {
