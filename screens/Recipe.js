@@ -13,10 +13,6 @@ const Recipe = props => {
   const recipeId = props.navigation.getParam("recipeId");
   const recipeDetail = availableRecipes.find(rcp => rcp.id === recipeId);
 
-  useEffect(() => {
-    props.navigation.setParams({ recipeTitle: recipeDetail.title });
-  }, [recipeDetail]);
-
   return (
     <ScrollView>
       <Image source={{ uri: recipeDetail.imageUrl }} style={styles.image} />
