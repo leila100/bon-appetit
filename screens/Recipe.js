@@ -5,6 +5,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { RECIPES } from "../data/dummy-data";
 import CustomHeaderButton from "../components/HeaderButton";
 import DefaultText from "../components/DefaultText";
+import ListItem from "../components/ListItem";
 
 const Recipe = props => {
   const recipeId = props.navigation.getParam("recipeId");
@@ -20,11 +21,11 @@ const Recipe = props => {
       </View>
       <Text style={styles.title}>Ingredients</Text>
       {recipeDetail.ingredients.map(ingredient => (
-        <Text key={ingredient}>{ingredient}</Text>
+        <ListItem key={ingredient}>.. {ingredient}</ListItem>
       ))}
       <Text style={styles.title}>Steps</Text>
       {recipeDetail.steps.map(step => (
-        <Text key={step}>{step}</Text>
+        <ListItem key={step}>.. {step}</ListItem>
       ))}
     </ScrollView>
   );
