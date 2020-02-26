@@ -10,9 +10,10 @@ import { toggleFavorite } from "../store/actions/recipes";
 
 const Recipe = props => {
   const availableRecipes = useSelector(state => state.recipes.recipes);
-
   const recipeId = props.navigation.getParam("recipeId");
   const recipeDetail = availableRecipes.find(rcp => rcp.id === recipeId);
+
+  const isFavorite = useSelector(state => state.recipes.favoriteRecipes.some(recipe => recipe.id === recipeId));
 
   const dispatch = useDispatch();
 
@@ -23,6 +24,10 @@ const Recipe = props => {
   useEffect(() => {
     props.navigation.setParams({ toggleFav: toggleFavHandler });
   }, [toggleFavHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ isFav: isFavorite });
+  }, [isFavorite]);
 
   return (
     <ScrollView>
@@ -47,11 +52,13 @@ const Recipe = props => {
 Recipe.navigationOptions = navigationData => {
   const title = navigationData.navigation.getParam("recipeTitle");
   const toggleFav = navigationData.navigation.getParam("toggleFav");
+  const isFav = navigationData.navigation.getParam("isFav");
+
   return {
     headerTitle: title,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item title='Favorite' iconName='ios-star' onPress={toggleFav} />
+        <Item title='Favorite' iconName={isFav ? "ios-star" : "ios-star-outline"} onPress={toggleFav} />
       </HeaderButtons>
     )
   };
