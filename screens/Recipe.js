@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import { useSelector } from "react-redux";
@@ -12,6 +12,10 @@ const Recipe = props => {
 
   const recipeId = props.navigation.getParam("recipeId");
   const recipeDetail = availableRecipes.find(rcp => rcp.id === recipeId);
+
+  useEffect(() => {
+    props.navigation.setParams({ recipeTitle: recipeDetail.title });
+  }, [recipeDetail]);
 
   return (
     <ScrollView>
@@ -34,13 +38,10 @@ const Recipe = props => {
 };
 
 Recipe.navigationOptions = navigationData => {
-  const availableRecipes = useSelector(state => state.recipes.recipes);
-
-  const recipeId = navigationData.navigation.getParam("recipeId");
-  const recipeDetail = availableRecipes.find(rcp => rcp.id === recipeId);
+  const title = navigationData.navigation.getParam("recipeTitle");
 
   return {
-    headerTitle: recipeDetail.title,
+    headerTitle: title,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
