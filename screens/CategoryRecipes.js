@@ -1,12 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-import { CATEGORIES, RECIPES } from "../data/dummy-data";
+import { CATEGORIES } from "../data/dummy-data";
 import RecipeList from "../components/RecipeList";
 
 const CategoriesRecipes = props => {
   const catId = props.navigation.getParam("categoryId");
 
-  const recipeList = RECIPES.filter(recipe => recipe.categoryIds.includes(catId));
+  const availableRecipes = useSelector(state => state.recipes.filteredRecipes);
+
+  const recipeList = availableRecipes.filter(recipe => recipe.categoryIds.includes(catId));
 
   return <RecipeList listData={recipeList} navigation={props.navigation} />;
 };
