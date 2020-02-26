@@ -1,13 +1,17 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import HeaderButton from "../components/HeaderButton";
+import Colors from "../constants/Colors";
+import Switch from "../components/BasicSwitch";
 
 const Filters = () => {
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
   return (
     <View style={styles.screen}>
-      <Text>The Filters Screen</Text>
+      <Text style={styles.title}>Available Filters / Restrictions</Text>
+      <Switch label='Gluten Free' value={isGlutenFree} setValue={setIsGlutenFree} />
     </View>
   );
 };
@@ -32,8 +36,13 @@ Filters.navigationOptions = navData => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center"
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    fontSize: 22,
+    margin: 20,
+    textAlign: "center"
   }
 });
 
