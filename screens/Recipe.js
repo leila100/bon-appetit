@@ -1,19 +1,32 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { ScrollView, StyleSheet, Text, View, Image } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { RECIPES } from "../data/dummy-data";
 import CustomHeaderButton from "../components/HeaderButton";
+import DefaultText from "../components/DefaultText";
 
 const Recipe = props => {
   const recipeId = props.navigation.getParam("recipeId");
   const recipeDetail = RECIPES.find(rcp => rcp.id === recipeId);
 
   return (
-    <View style={styles.screen}>
-      <Text>{recipeDetail.title}</Text>
-      <Text>{recipeDetail.cost}</Text>
-    </View>
+    <ScrollView>
+      <Image source={{ uri: recipeDetail.imageUrl }} style={styles.image} />
+      <View style={styles.details}>
+        <DefaultText>{recipeDetail.duration}m</DefaultText>
+        <DefaultText>{recipeDetail.complexity.toUpperCase()}</DefaultText>
+        <DefaultText>{recipeDetail.cost.toUpperCase()}</DefaultText>
+      </View>
+      <Text style={styles.title}>Ingredients</Text>
+      {recipeDetail.ingredients.map(ingredient => (
+        <Text key={ingredient}>{ingredient}</Text>
+      ))}
+      <Text style={styles.title}>Steps</Text>
+      {recipeDetail.steps.map(step => (
+        <Text key={step}>{step}</Text>
+      ))}
+    </ScrollView>
   );
 };
 
@@ -38,10 +51,20 @@ Recipe.navigationOptions = navigationData => {
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
+  image: {
+    height: 200,
+    width: "100%"
+  },
+  details: {
+    flexDirection: "row",
+    padding: 15,
+    justifyContent: "space-around",
     alignItems: "center"
+  },
+  title: {
+    fontFamily: "open-sans-bold",
+    fontSize: 22,
+    textAlign: "center"
   }
 });
 
